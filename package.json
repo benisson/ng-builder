@@ -1,12 +1,12 @@
 {
-  "name": "ng-builder",
+  "name": "ng-builder-lib",
   "keywords": [],
   "author": "",
   "license": "MIT",
   "version": "1.0.0",
   "description": "Compiler components angular",
   "bin": {
-    "ng-builder": "./bin/nglb.js"
+    "ng-builder-lib": "./bin/nglb.js"
   },
   "scripts": {
     "test": "nyc mocha src/**/*.spec.ts --timeout 15000",
