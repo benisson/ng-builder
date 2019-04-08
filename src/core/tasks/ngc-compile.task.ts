@@ -19,7 +19,7 @@ export class NgcCompileTask implements ITask {
     gulp.task(taskName, dependencies, (done: Function) => {
 
       const tsConfig = `${argv[OptionsKeys.OUT_DIR]}/tsconfig-ngc.json`;
-      const pathNgcDefault = "./node_modules/.bin/ngc -p " + tsConfig;
+      const pathNgcDefault =  this.getPath() + "/node_modules/.bin/ngc -p " + tsConfig;
       const command = pathNgcDefault || `${argv[OptionsKeys.PATH_NGC]}`;
 
       const path = `./${argv[OptionsKeys.ROOT_DIR]}`;
@@ -34,11 +34,24 @@ export class NgcCompileTask implements ITask {
         stderr: true, // default = true, false means don't write stderr
         stdout: true // default = true, false means don't write stdout
       };
+
+      
       return gulp.src(path)
         .pipe(exec(command, options))
         .pipe(exec.reporter(reportOptions));
     });
 
+    
+
     return taskName;
+  }
+
+  getPath()
+  {      
+      if(!process.env.PWD)
+      {
+            process.env.PWD = process.cwd();
+      }	
+	    return process.env.PWD;
   }
 }
